@@ -3,7 +3,7 @@ import pickle
 from PIL import Image
 
 def main():
-    st.title("Framingham")
+    st.title("FRAMINGHAM CHRONIC HEART DISEASE PREDICTION")
     image=Image.open("framinghamimg.jpeg")
     st.image(image,width=800)
     gender=st.radio("Gender",["Male","Female"])
@@ -12,7 +12,6 @@ def main():
     else:
         male=0
     age=st.text_input("Age","Type Here")
-    education=st.selectbox("Education",(1.0,2.0,3.0,4.0))
     cs=st.radio("Current Smoker",["Yes","No"])
     if cs == "Yes":
         currentSmoker=1
@@ -45,9 +44,9 @@ def main():
     bmi = st.text_input("BMI", "Type Here")
     hr = st.text_input("Heart Rate", "Type Here")
     gc = st.text_input("Glucose", "Type Here")
-    features=[male,age,education,currentSmoker,cpd,bpmeds,prevalentStroke,prevalentHyp,diabetes,tc,sbp,dbp,bmi,hr,gc]
-    model = pickle.load(open('model_framingham.sav', 'rb'))
-    scaler = pickle.load(open('scaler_framingham.sav', 'rb'))
+    features=[male,age,currentSmoker,cpd,bpmeds,prevalentStroke,prevalentHyp,diabetes,tc,sbp,dbp,bmi,hr,gc]
+    model = pickle.load(open('model_framingham1.sav', 'rb'))
+    scaler = pickle.load(open('scaler_framingham1.sav', 'rb'))
     pred = st.button('PREDICT')
     if pred:
         prediction = model.predict(scaler.transform([features]))
