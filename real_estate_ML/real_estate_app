@@ -1,0 +1,21 @@
+import streamlit as st
+import pickle
+from PIL import Image
+
+def main():
+    st.title("Real Estate House Price Prediction")
+    image=Image.open("realestateimg.jpg")
+    st.image(image, width=800)
+    x2=st.text_input("House Age","Type Here")
+    x3=st.text_input("Distance to the nearest MRT station","Type Here")
+    x4=st.text_input("Number of convenience stores","Type Here")
+    x5=st.text_input("Latitude","Type Here")
+    x6=st.text_input("Longitude","Type Here")
+    features=[x2,x3,x4,x5,x6]
+    model = pickle.load(open('model_realestate1.sav', 'rb'))
+    scaler = pickle.load(open('scaler_realestate1.sav', 'rb'))
+    pred=st.button("PREDICT")
+    if pred:
+        prediction = model.predict(scaler.transform([features]))
+        st.write("House price of unit area: ",prediction)
+main()
